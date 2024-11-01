@@ -1,0 +1,16 @@
+{
+  "name": "wordpress-plugin",
+  "version": "1.1.1",
+  "private": true,
+  "scripts": {
+    "start": "cgb-scripts start",
+    "build": "cgb-scripts build",
+    "eject": "cgb-scripts eject"
+  },
+  "dependencies": {
+    "@wordpress/components": "7.1.0",
+    "@wordpress/editor": "9.1.0",
+    "@wordpress/element": "2.2.0",
+    "cgb-scripts": "1.15.0"
+  }
+}

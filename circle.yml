@@ -1,0 +1,30 @@
+machine:
+  node:
+    version: 8.11.3
+
+general:
+  artifacts:
+    - "plugins"
+  branches:
+    only:
+     - master
+
+dependencies:
+  pre:
+    - sudo apt-get update
+    - sudo apt-get install subversion
+  override:
+    - echo "No external dependencies"
+
+test:
+  override:
+    - echo "No tests"
+
+deployment:
+  production:
+    branch: master
+    commands:
+      - svn co https://plugins.svn.wordpress.org/wp-reviews-by-wiremo
+      - rsync -r --exclude='wp-reviews-by-wiremo' ./ wp-reviews-by-wiremo/trunk
+      - cd wp-reviews-by-wiremo && svn add --force trunk/* 
+      - cd wp-reviews-by-wiremo && svn ci --no-auth-cache --username $WP_ORG_USERNAME --password $WP_ORG_PASSWORD -m "CI deploy $CIRCLE_SHA1"
